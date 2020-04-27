@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta charset="viewport" content="width=davice-width, initlal-scale=1.0" />
+    <script src="jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.10.3.custom.min.js"></script>
+    
+    <title>홈페이지</title>
+    <script>
+        $(function(){
+            var visual = $('#brandVisual > ul > li');
+            var button = $('#buttonList > ul > li');
+            var current = 0;
+            var setIntervalId;
+            
+            button.on({
+                click:function(){
+                    var tg = $(this);
+                    var i = tg.index();
+                    button.removeClass('on');
+                    tg.addClass('on');
+                    move(i);
+                }
+            });
+            timer();
+            $("#wrap").on({
+                mouseover:function(){
+                    clearInterval(setIntervalId);
+                },
+                moseover:function(){
+                    timer();
+                }
+            });
+            function timer(){
+                setIntervalId = setInterval(function(){
+                    var n = current + 1;
+                    if (n == visual.length)
+                         n = 0
+                    button.eq(n).trigger('click');
+                    }, 3000);
+            };
+            function move(i){
+                if(current == i) return;
+                
+                var current1 = visual.eq(current);
+                var next1 = visual.eq(i);
+                
+                current1.css({left:0}).stop().animate({left:'-100%'});
+                next1.css({left:'100%'}).stop().animate({left:0});
+                
+                current = i;
+            }
+            $("#next").on({
+                click:function(){
+                    var i = current + 1;
+                    if(i > visual.length-1) i =0;
+                    
+                    button.eq(i).trigger ('click');
+                }
+            });
+            $("#prev").on({
+                click:function(){
+                    var i = current - 1;
+                    if(i < 0) visual.length -1;
+                    
+                    button.eq(i).trigger ('click');
+                }
+            });
+        });
+//        -------------------------------------
+        $(document).ready(function(){
+            var $banner = $(".banner");
+            var bannerLength = $banner.find("img").length;
+            var bannerwidth = $(".banner").width();
+            var current=0;
+            
+            $("#prev").click(function(){
+                current--;
+                if (current<0){current = bannerLength-1};
+                showInage(current);
+            });
+            $("#next").click(function(){
+                current++;
+                if (current >= bannerLength){current = 0};
+                showImage(current);
+            });
+            function showImage(index){
+                var left = (index*bannerwidth);
+                $banner.scrollLeft(left);
+            };
+        });
+        
+//        ----------------------------===--------------
+        
+//        
+//        $(function(){
+//            var visual = $('#container > ul > li');
+//            var button = $('#container > ul > li');
+//            var current = 0;
+//            var setIntervalId;
+//            
+//            button.on({
+//                click:function(){
+//                    var tg = $(this);
+//                    var i = tg.index();
+//                    button.removeClass('on');
+//                    tg.addClass('on');
+//                    move(i);
+//                }
+//            });
+//            timer();
+//            $("#section").on({
+////                mouseover:function(){
+////                    clearInterval(setIntervalId);
+////                },
+////                moseover:function(){
+////                    timer();
+////                }
+//            });
+//            function timer(){
+//                setIntervalId = setInterval(function(){
+//                    var n = current + 1;
+//                    if (n == visual.length)
+//                         n = 0
+//                    button.eq(n).trigger('click');
+//                    }, 3000);
+//            };
+//            function move(i){
+//                if(current == i) return;
+//                
+//                var current1 = visual.eq(current);
+//                var next1 = visual.eq(i);
+//                
+//                current1.css({left:0}).stop().animate({left:'-100%'});
+//                next1.css({left:'100%'}).stop().animate({left:0});
+//                
+//                current = i;
+//            }
+//            $("#next").on({
+//                click:function(){
+//                    var i = current + 1;
+//                    if(i > visual.length-1) i =0;
+//                    
+//                    button.eq(i).trigger ('click');
+//                }
+//            });
+//            $("#prev").on({
+//                click:function(){
+//                    var i = current - 1;
+//                    if(i < 0) visual.length -1;
+//                    
+//                    button.eq(i).trigger ('click');
+//                }
+//            });
+//        });
+        
+        
+    </script>
+    
+<!--    ----------------------------------------------------->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+        li {
+            list-style: none;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        img, input, select {
+            border: 0;
+            vertical-align: center;
+        }
+        div {
+            display: block;
+            box-sizing: border-box;
+        }
+        body {
+            font-size: 14px;
+        }
+        
+        #header {
+            position: relative;
+            width: 100%;
+            height: 115px;
+            height: 115px;
+        }
+        .logo{
+            width: 10%; 
+            float: left;
+        }
+        .logo img { 
+            width: 10%;
+            min-width: 107px;
+            max-width: 150px;
+            margin-top: 20px;
+            margin-left: 36px;
+        }
+        .top_menu {
+            float: right;
+            width: 15%;
+        }
+        .top_menu a {
+            font-size: 13px;
+            display: inline-block;
+            padding: 5px 10px 5px;
+        }
+     
+        #nav {
+            background: #FFF;
+            height: 45px;
+            margin-top: 10;
+            width: 75%;
+            float: left;
+        }
+        
+        .gnb_top {
+            float: left;
+            width: 70%;
+            margin-left: 26%;
+        }
+        .gnb_top > li {float:left;}
+        .gnb_top > li > a {
+            display: block;
+            width: 160px;    
+            font-size: 14px;
+            line-height: 45px;
+            text-align: center;
+            color: #000;
+        }
+        .lnb {
+            display: none;
+        }
+        .gnb_top > li:hover > .lnb {
+            display: block;
+        }
+        .lnb li {
+            color: #000;
+            margin-left: 45px;
+        }
+        .lnb li a {display:block;}
+
+        
+        #brandVisual {
+            position: relative;
+            width: 60%;
+            height: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            background: #8c908c;
+        }
+        #brandVisual ul {
+            position: relative;
+            float: left;
+            width: 100%;
+            height: 800px;
+            margin: 0;
+            padding: 0;
+        }
+        #brandVisual ul li {
+            position: absolute;
+            width: 100%;
+            height: 800px;
+        }
+        #brandVisual ul li a {
+            display: block; 
+            text-indent: -9999px;
+        }
+        
+        
+        #brandVisual .visual01 { left: 0px; background: url("header1.jpg") 50% 0 no-repeat; background-size: cover; }
+        #brandVisual .visual02 { left: 100%; background: url("header2.jpg") 50% 0 no-repeat; background-size: cover; }
+        #brandVisual .visual03 { left: 200%; background: url("header3.jpg") 50% 0 no-repeat; background-size: cover; }
+        #brandVisual .visual04 { left: 300%; background: url("header4.jpg") 50% 0 no-repeat; background-size: cover; }
+        #brandVisual .visual05 { left: 400%; background: url("header5.jpg") 50% 0 no-repeat; background-size: cover; }
+        #brandVisual .visual06 { left: 500%; background: url("header6.jpg") 50% 0 no-repeat; background-size: cover; }
+        
+        #buttonList:after{ content: ""; display: block; clear: both }
+        
+        #buttonList li {
+            background: url("btnVisual.png") 0 -16px no-repeat;
+            width: 14px;
+            height: 15px;
+            float: left;
+            position: relative;
+            left: 70%;
+            top: -40px;
+            overflow: hidden;
+            margin: 0 5px;
+            cursor: pointer; 
+        }
+        #buttonList li.on {
+            background-position: 0 0;
+        }
+        #buttonList li a {
+            display: block;
+            text-indent: -999px;
+        }
+        
+/*        -----------------------------*/
+     
+        #banner_wrap{
+            margin: 50px;
+            margin-left: 700px;
+            
+        }
+        div.banner {
+            margin-top: 10px;
+            width: 802px;
+            height: 500px;
+            position: relative; 
+            overflow: hidden;
+        }
+        div.banner-container {
+            width: 4812px;
+        }
+        div.banner-container img {
+            display: block;
+            float: left;
+            left: 0;
+            top: 0;
+            width: 802px;
+        }
+        
+/*        -----------------------------*/
+        
+/*
+        #container {
+            position: relative;
+            width: 60%;
+            height: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            background: #8c908c;
+        }
+        #container ul {
+            position: relative;
+            float: left;
+            width: 100%;
+            height: 800px;
+            margin: 0;
+            padding: 0;
+        }
+        #container ul li {
+            position: absolute;
+            width: 100%;
+            height: 800px;
+        }
+        #container ul li a {
+            display: block; 
+            text-indent: -999px;
+        }
+        
+        
+        #container .contnet01 { left: 0px; background: url("section03.jpg") 50% 0 no-repeat; }
+         #container .contnet02 { left: 100%; background: url("section02.jpg") 50% 0 no-repeat; }
+        #container .contnet03 { left: 200%; background: url("section01.jpg") 50% 0 no-repeat; }
+        #container .contnet04 { left: 200%; background: url("section04.jpg") 50% 0 no-repeat; }
+        
+        #button:after{ content: ""; display: block; clear: both }
+        
+        #button li {
+            background: url("btnVisual.png") 0 -16px no-repeat;
+            width: 14px;
+            height: 15px;
+            float: left;
+            position: relative;
+            left: 70%;
+            top: -40px;
+            overflow: hidden;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        #button li.on {
+            background-position: 0 0;
+        }
+        #button li a {
+            display: block;
+            text-indent: -9999px;
+*/
+    </style>
+</head>
+<body>
+   
+    <div id="header">
+         <div class="logo">
+           <img src="logo.png" alt="" >
+        </div>
+       
+        <div id="nav">
+            <ul class="gnb_top">
+               <li><a href="#">COMPANY</a>
+                   <ul class="lnb">
+                       <li><a href="#">COMPANT INFO</a></li>
+                       <li><a href="#">GREETINGS</a></li>
+                       <li><a href="#">HISTORY</a></li>
+                       <li><a href="#">ORGANIZATION</a></li>
+                       <li><a href="#">BUSINESS AREA</a></li>
+                       <li><a href="#">20SPCE</a></li>
+                       <li><a href="#">IR</a></li>
+                   </ul>
+               </li>
+               <li><a href="#">ARTIST</a>
+                   <ul class="lnb">
+                       <li><a href="#">JO KWON</a></li>
+                       <li><a href="#">JANG HYUN SEUNG</a></li>
+                       <li><a href="#">TROUBLE MAKER</a></li>
+                       <li><a href="#">BTOB</a></li>
+                       <li><a href="#">CLC</a></li>
+                       <li><a href="#">PENTAGON</a></li>
+                       <li><a href="#">TRIPLE H</a></li>
+                       <li><a href="#">WOOSEOK X  KUANLIN</a></li>
+                       <li><a href="#">(G)I-DLE</a></li>
+                       <li><a href="#">LAI KUANLN</a></li>
+                       <li><a href="#">YOO SEONHO</a></li>
+                   </ul>
+               </li>
+               <li><a href="#">MULTMEDIA</a>
+                   <ul class="lnb">
+                       <li><a href="#">MUSIC VIDEO</a></li>
+                       <li><a href="#">DOWNLOAD</a></li>
+                   </ul>
+               </li>
+               <li><a href="#">AUDTION</a></li>
+               <li><a href="#">NOTICE</a>
+                   <ul class="lnb">
+                       <li><a href="#">NOTICE</a></li>
+                       <li><a href="#">FROM CUBE</a></li>
+                       <li><a href="#">TO CUBE</a></li>
+                   </ul>
+               </li>
+            </ul>
+        </div>
+        
+        <div class="top_menu">
+           <a href="#">로그인</a>
+           <a href="#">회원가입</a>
+           <a href="#">사이트맵</a>
+        </div>
+    </div>
+    
+    <div id="wrap">
+       <div id="brandVisual">
+           <ul>
+               <li class="visual01"><a href="#">배너1</a></li>
+               <li class="visual02"><a href="#">배너2</a></li>
+               <li class="visual03"><a href="#">배너3</a></li>
+               <li class="visual04"><a href="#">배너4</a></li>
+               <li class="visual05"><a href="#">배너5</a></li>
+               <li class="visual06"><a href="#">배너6</a></li>
+           </ul>
+       </div>
+       <div id="buttonList">
+            <ul>
+                <li class="on"><a href="#">버튼1</a></li>
+                <li><a href="#">버튼2</a></li>
+                <li><a href="#">버튼3</a></li>
+                <li><a href="#">버튼4</a></li>
+                <li><a href="#">버튼5</a></li>
+                <li><a href="#">버튼6</a></li>
+            </ul>
+        </div>
+         <div>
+        <button id="prev"></button>
+        <button id="next"></button>
+    </div>
+    </div>  
+    
+    <div id="banner_wrap">
+        <div class="banner">
+            <div class="banner-container">
+                <img src="section01.jpg">
+                <img src="section02.jpg">
+                <img src="section03.jpg">
+            </div>
+        </div>
+        <button id="prev"><img src="arrow_lb.gif" alt=""></button>
+        <button id="next"><img src="arrow_rb.gif" alt=""></button>
+    </div>
+    <br>
+<!--
+    <div id="section">
+       <div id="container">
+           <ul>
+               <li class="contnet01"><a href="#"></a></li>
+               <li class="contnet02"><a href="#"></a></li>
+               <li class="contnet03"><a href="#"></a></li>
+               <li class="contnet04"><a href="#"></a></li>
+           </ul>
+       </div>
+       <div id="button">
+            <ul>
+                <li class="on"><a href="#">버튼1</a></li>
+                <li><a href="#">버튼2</a></li>
+                <li><a href="#">버튼3</a></li>
+                <li><a href="#">버튼4</a></li>
+            </ul>
+        </div>
+        <div id="next"><a href="#"><img src="arrow_lb.gif" alt=""></a></div>
+        <div id="prev"><a href="#"><img src="arrow_rb.gif" alt=""></a></div>
+    </div>
+    
+-->
+<!----------------------------------------------------->
+</body>
+</html>
