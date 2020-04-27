@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <title>Document</title>
+   <script src="js/jquery-3.4.1.min.js"></script>
+   <script src="js/prefixfree.min.js"></script>
+   <script>
+       $(document).ready(function(){
+           $(".line01, .line02, .line03, .line04").hide();
+          $(".wrapper").mouseenter(function(){
+              var i = $(this).index();
+              $(".line01").eq(i).show();
+              $(".line02").eq(i).show();
+              $(".line03").eq(i).show();
+              $(".line04").eq(i).show();
+          });
+            $(".wrapper").mouseleave(function(){
+              var i = $(this).index();
+              $(".line01").eq(i).hide();
+              $(".line02").eq(i).hide();
+              $(".line03").eq(i).hide();
+              $(".line04").eq(i).hide();
+          });
+       });
+   </script>
+   <style>
+       *{margin: 0; padding: 0;}
+       li {list-style: none;}
+       body{
+           width: 100%;
+           height: 100%;
+           font-family: "돋움";
+           font-size: 14px;
+           color: #333;
+           line-height: 1em;
+       }
+       
+       
+       .wrapper{width: 500px; height: 500px; background: orange; margin: 0 auto; position: relative;}
+       
+       .line01{
+           width: 0px; height: 10px; background: #000;
+           animation-name: line1;
+       }
+       .line02{
+           width: 10px; height: 0; background: #f00;
+           position: absolute; right: 0;top: 0;
+           animation-name: line2;
+           animation-delay: 2s;
+       }
+       .line03{
+           width: 0px; height: 10px; background: #0f0;
+           position: absolute; bottom: 0; right: 0;
+           animation-name: line3;
+           animation-delay: 4s;
+       }
+       .line04{
+           width: 10px; height: 0; background: #00f;
+           position: absolute; bottom:  0;left: 0;
+           animation-name: line4;
+           animation-delay: 6s;
+       }
+       .line01, .line02, .line03, .line04{
+           animation-duration: 2s;
+           animation-fill-mode: forwards;
+           animation-timing-function: linear;
+       }
+       
+       @keyframes line1{
+           from{width: 0px;}
+           to{width: 500px;}
+       }
+       @keyframes line2{
+           from{height: 0;}
+           to{height: 500px;}
+       }
+       @keyframes line3{
+           from{width: 0;}
+           to{width: 500px;}
+       }
+       @keyframes line4{
+           from{height: 0;}
+           to{height: 500px;}
+       }
+       
+   </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="line01"></div>
+        <div class="line02"></div>
+        <div class="line03"></div>
+        <div class="line04"></div>
+    </div>
+</body>
+</html>
